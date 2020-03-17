@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 import apis from '../apis/api';
 
@@ -11,6 +12,7 @@ class PostList extends Component {
         this.state = {
             datalist: [],
             _token: '',
+            detailPost: {},
         }
         // this.title = this.props.data.title;
         // this.content = this.props.data.content;
@@ -26,6 +28,7 @@ class PostList extends Component {
     }
 
     agreePost = async (id, e) => {
+        console.log(id)
         e.preventDefault();
         await apis.agreeToPost(id)
         .then(res => {
@@ -37,11 +40,21 @@ class PostList extends Component {
     getList = async () => {
         // e.preventDefault();
     
-        await apis.getPost()
-        .then(res => {
+        await apis.getPost().then(res => {
             console.log(res)
             this.setState({datalist: res.data})
         })
+        .catch(err => {
+            console.log(err);
+        })
+        
+        // await apis.getMyPost().then(res => {
+        //     console.log(res)
+        //     this.setState({datalist: res.data})
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        // })
       }
 
     componentDidMount() {
@@ -51,8 +64,11 @@ class PostList extends Component {
         // })
     }
 
-    logout = () => {
+    detail = (id, e) => {
         //
+        e.preventDefault();
+
+        this.props.history.push(`/detail/${id}/`, [id]);
     };
 
 
@@ -75,6 +91,10 @@ class PostList extends Component {
                                     <form onSubmit={_.partial(this.agreePost, data.id)}>
                                         <input type='submit' value='agree' />
                                     </form>
+                                    <form onSubmit={_.partial(this.detail, data.id)}>
+                                        <input type='submit' value='detail' />
+                                    </form>
+                                    {/* <Link to='/detail' >detail</Link> */}
                                 </div>
                             </div>
                         )

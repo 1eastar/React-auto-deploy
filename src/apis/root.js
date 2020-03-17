@@ -6,7 +6,7 @@ export async function getAuthorizedHeader(){
     if(_token){
         let config = {
             headers: {
-                'Authorization': 'Token '+_token
+                'Authorization': 'JWT '+_token
             }
         }
         return config
@@ -32,6 +32,20 @@ export async function post(url, data){
     return getAuthorizedHeader().then(config => {
         return axios.post(url, data, config);
     })
+}
+
+export async function patch(url, data){
+    return getAuthorizedHeader().then(config => {
+        return axios.patch(url, data, config);
+    })
+}
+
+export async function getWithoutToken(url) {
+    return axios.get(url);
+}
+
+export async function postWithoutToken(url, data){
+    return axios.post(url, data);
 }
 
 export async function remove(url){
