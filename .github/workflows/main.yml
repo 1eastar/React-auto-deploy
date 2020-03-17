@@ -6,8 +6,8 @@ jobs:
     name: hello github action
     runs-on: ubuntu-18.04
     steps:
-      - name: chaeckout source code
+      - name: checkout source code
         uses: actions/checkout@master
       
       - name: echo Hello
-        uses: echo "Hello"
+        run: echo "Hello"
