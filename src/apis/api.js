@@ -3,7 +3,7 @@ import axios from 'axios';
 import { get, post, patch, remove, postWithoutToken, getWithoutToken } from './root';
 
 const env = 'prod'
-axios.defaults.baseURL = (env == 'dev') ? 'http://127.0.0.1:8000/' : 'http://ec2-13-209-85-63.ap-northeast-2.compute.amazonaws.com';
+axios.defaults.baseURL = (env == 'dev') ? 'http://127.0.0.1:8000/' : 'http://djangobackend-dev.ap-northeast-2.elasticbeanstalk.com/';
 // const url = 'http://127.0.0.1:8000/';
 
 const clientID = 'mmks6E3InDYPaGFqUOM0';
